@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="description" content="三个月行动计划每日执行记录" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="重新掌舵" />
+    <title>重新掌舵 · 每日执行记录</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">6月1日 — 8月31日</p>
+          <h1>重新掌舵</h1>
+        </div>
+        <div class="period-badge" id="periodBadge">第 1 周</div>
+      </header>
+
+      <main>
+        <section class="view active" id="todayView" data-view="today">
+          <div class="date-row">
+            <button class="icon-button" id="previousDay" aria-label="前一天" title="前一天">‹</button>
+            <button class="date-picker-button" id="datePickerButton">
+              <span id="dateTitle">6月1日 星期一</span>
+              <small id="dateSubtitle">计划第 1 天</small>
+            </button>
+            <input type="date" id="dateInput" aria-label="选择日期" />
+            <button class="icon-button" id="nextDay" aria-label="后一天" title="后一天">›</button>
+          </div>
+
+          <section class="score-panel">
+            <div class="score-ring" id="scoreRing">
+              <strong id="scoreValue">0</strong>
+              <span>/ 7</span>
+            </div>
+            <div>
+              <p class="score-label" id="scoreLabel">从一件小事开始</p>
+              <p class="score-copy" id="scoreCopy">完成 5 项就是合格的一天。</p>
+            </div>
+          </section>
+
+          <section class="focus-strip" id="dailyFocus">
+            <span class="focus-label">今日重点</span>
+            <span class="focus-content">
+              <strong id="focusText">启动，不求完美</strong>
+              <small id="focusTasks"></small>
+            </span>
+          </section>
+
+          <form id="dailyForm" autocomplete="off">
+            <section class="form-section">
+              <div class="section-heading">
+                <div>
+                  <span class="section-number">01</span>
+                  <h2>早上启动</h2>
+                </div>
+                <span class="section-time">10 分钟</span>
+              </div>
+
+              <label class="field-label" for="weight">今日体重</label>
+              <div class="input-with-unit">
+                <input id="weight" name="weight" type="number" min="80" max="300" step="0.1" inputmode="decimal" placeholder="例如 190" />
+                <span>斤</span>
+              </div>
+
+              <fieldset>
+                <legend>今天最重要的 3 件事</legend>
+                <div class="priority-list">
+                  <label><span>1</span><input name="priority1" type="text" placeholder="最关键的一件事" /></label>
+                  <label><span>2</span><input name="priority2" type="text" placeholder="第二件事" /></label>
+                  <label><span>3</span><input name="priority3" type="text" placeholder="第三件事" /></label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>今天的饮酒决定</legend>
+                <div class="segmented three">
+                  <label><input type="radio" name="alcohol" value="none" /><span>不喝酒</span></label>
+                  <label><input type="radio" name="alcohol" value="social" /><span>应酬限量</span></label>
+                  <label><input type="radio" name="alcohol" value="drank" /><span>已饮酒</span></label>
+                </div>
+                <input class="subtle-input" name="alcoholNote" type="text" placeholder="应酬限量或实际情况（可选）" />
+              </fieldset>
+            </section>
+
+            <section class="form-section">
+              <div class="section-heading">
+                <div>
+                  <span class="section-number">02</span>
+                  <h2>饮食与运动</h2>
+                </div>
+                <span class="section-time">稳住节奏</span>
+              </div>
+
+              <label class="switch-row">
+                <span>
+                  <strong>16+8 饮食窗口</strong>
+                  <small>12:00–20:00，20:00 后不进食</small>
+                </span>
+                <input type="checkbox" name="fasting" />
+                <i></i>
+              </label>
+
+              <fieldset>
+                <legend>今日运动</legend>
+                <div class="choice-grid" id="exerciseChoices">
+                  <label><input type="radio" name="exercise" value="run" /><span>跑步</span></label>
+                  <label><input type="radio" name="exercise" value="strengthA" /><span>力量 A</span></label>
+                  <label><input type="radio" name="exercise" value="strengthB" /><span>力量 B</span></label>
+                  <label><input type="radio" name="exercise" value="basketball" /><span>篮球</span></label>
+                  <label><input type="radio" name="exercise" value="walk" /><span>快走</span></label>
+                  <label><input type="radio" name="exercise" value="stretch" /><span>拉伸</span></label>
+                  <label><input type="radio" name="exercise" value="rest" /><span>休息</span></label>
+                </div>
+              </fieldset>
+
+              <div class="two-columns">
+                <label>
+                  <span class="field-label">时长</span>
+                  <div class="input-with-unit compact">
+                    <input name="exerciseMinutes" type="number" min="0" max="300" inputmode="numeric" placeholder="0" />
+                    <span>分钟</span>
+                  </div>
+                </label>
+                <label>
+                  <span class="field-label">跑步距离</span>
+                  <div class="input-with-unit compact">
+                    <input name="distance" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="0" />
+                    <span>公里</span>
+                  </div>
+                </label>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <div class="section-heading">
+                <div>
+                  <span class="section-number">03</span>
+                  <h2>生活与工作</h2>
+                </div>
+                <span class="section-time">拿回秩序</span>
+              </div>
+
+              <label class="switch-row">
+                <span>
+                  <strong>断舍离</strong>
+                  <small>每天清理一个小区域</small>
+                </span>
+                <input type="checkbox" name="declutter" />
+                <i></i>
+              </label>
+
+              <div class="two-columns">
+                <label>
+                  <span class="field-label">清理时长</span>
+                  <div class="input-with-unit compact">
+                    <input name="declutterMinutes" type="number" min="0" max="180" inputmode="numeric" value="15" />
+                    <span>分钟</span>
+                  </div>
+                </label>
+                <label>
+                  <span class="field-label">清理区域</span>
+                  <input name="declutterArea" type="text" placeholder="衣柜、书桌…" />
+                </label>
+              </div>
+
+              <label class="switch-row">
+                <span>
+                  <strong>完成一个重要工作动作</strong>
+                  <small>不是忙碌，是推动关键事项</small>
+                </span>
+                <input type="checkbox" name="importantWork" />
+                <i></i>
+              </label>
+
+              <label>
+                <span class="field-label">今天推进了什么？</span>
+                <textarea name="workNote" rows="3" placeholder="例如：建立项目风险清单，明确一个任务交付标准"></textarea>
+              </label>
+            </section>
+
+            <section class="form-section reflection-section">
+              <div class="section-heading">
+                <div>
+                  <span class="section-number">04</span>
+                  <h2>睡前复盘</h2>
+                </div>
+                <span class="section-time">5 分钟</span>
+              </div>
+
+              <div class="reflection-grid">
+                <label><input type="checkbox" name="reviewAlcohol" /><span>饮酒情况已记录</span></label>
+                <label><input type="checkbox" name="reviewExercise" /><span>运动情况已记录</span></label>
+                <label><input type="checkbox" name="reviewWork" /><span>重要工作已回顾</span></label>
+                <label><input type="checkbox" name="reviewDeclutter" /><span>断舍离已回顾</span></label>
+              </div>
+
+              <label>
+                <span class="field-label">给今天留一句话</span>
+                <textarea name="dailyNote" rows="2" placeholder="不写感悟，只记事实"></textarea>
+              </label>
+            </section>
+
+            <div class="save-bar">
+              <span id="saveStatus">修改会自动保存</span>
+              <button type="submit" class="primary-button">保存今日记录</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="view" id="historyView" data-view="history">
+          <div class="page-heading">
+            <p class="eyebrow">一步一步留下证据</p>
+            <h2>历史记录</h2>
+          </div>
+          <div class="history-summary" id="historySummary"></div>
+          <div class="history-list" id="historyList"></div>
+        </section>
+
+        <section class="view" id="weeklyView" data-view="weekly">
+          <div class="page-heading">
+            <p class="eyebrow">看趋势，不审判一天</p>
+            <h2>周复盘</h2>
+          </div>
+          <div class="week-switcher">
+            <button class="icon-button" id="previousWeek" aria-label="上一周">‹</button>
+            <strong id="weekTitle">本周</strong>
+            <button class="icon-button" id="nextWeek" aria-label="下一周">›</button>
+          </div>
+          <div class="stats-grid" id="weeklyStats"></div>
+          <section class="weekly-section">
+            <div class="weekly-section-heading">
+              <h3>本周完成度</h3>
+              <span id="weeklyScore"></span>
+            </div>
+            <div class="week-bars" id="weekBars"></div>
+          </section>
+          <section class="weekly-section">
+            <h3>下周准备</h3>
+            <label class="weekly-note-label">
+              下周最重要的 3 个工作事项
+              <textarea id="nextWeekPriorities" rows="4" placeholder="每行一项"></textarea>
+            </label>
+            <div class="weekday-picker">
+              <p>安排两次力量训练</p>
+              <div id="strengthDays"></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="settingsView" data-view="settings">
+          <div class="page-heading">
+            <p class="eyebrow">你的记录，归你所有</p>
+            <h2>数据与备份</h2>
+          </div>
+          <section class="settings-section install-card">
+            <div class="install-card-heading">
+              <div class="app-icon-preview">舵</div>
+              <div>
+                <h3>安装到 iPhone</h3>
+                <p id="installStatus">像普通 App 一样从主屏幕打开。</p>
+              </div>
+            </div>
+            <ol class="install-steps" id="installSteps">
+              <li>使用 Safari 打开远程网址</li>
+              <li>点击底部的“分享”按钮</li>
+              <li>选择“添加到主屏幕”</li>
+            </ol>
+            <button class="primary-button install-button" id="installApp" hidden>安装应用</button>
+          </section>
+          <section class="settings-section">
+            <h3>导出记录</h3>
+            <p>JSON 可完整恢复；CSV 适合在 Excel 中查看。</p>
+            <div class="button-row">
+              <button class="secondary-button" id="exportJson">导出 JSON</button>
+              <button class="secondary-button" id="exportCsv">导出 CSV</button>
+            </div>
+          </section>
+          <section class="settings-section">
+            <h3>导入备份</h3>
+            <p>导入此前导出的 JSON 文件。相同日期的记录将被覆盖。</p>
+            <label class="file-button">
+              选择 JSON 文件
+              <input type="file" id="importJson" accept="application/json,.json" />
+            </label>
+          </section>
+          <section class="settings-section goal-card">
+            <span>8 月底目标</span>
+            <strong>190 → 175 斤</strong>
+            <p>非应酬不喝酒 · 跑步 3 次 · 力量 2 次 · 每天整理 15 分钟</p>
+          </section>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="主要导航">
+        <button class="active" data-target="today"><span>✓</span>今日</button>
+        <button data-target="history"><span>▦</span>历史</button>
+        <button data-target="weekly"><span>≋</span>周复盘</button>
+        <button data-target="settings"><span>⋯</span>数据</button>
+      </nav>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
