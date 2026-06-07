@@ -1,4 +1,4 @@
-const CACHE_NAME = "restart-daily-v2";
+const CACHE_NAME = "restart-daily-v3";
 const APP_ASSETS = [
   "./",
   "./index.html",

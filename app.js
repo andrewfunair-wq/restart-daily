@@ -1,6 +1,6 @@
 const STORAGE_KEY = "andrew-daily-execution-v1";
 const WEEKLY_KEY = "andrew-weekly-plans-v1";
-const PLAN_START = new Date(2026, 5, 1);
+const PLAN_START = new Date(2026, 5, 8);
 const PLAN_END = new Date(2026, 7, 31);
 
 const weekdayNames = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
@@ -16,31 +16,31 @@ const exerciseNames = {
 };
 
 const firstWeekPlan = {
-  "2026-06-01": {
+  "2026-06-08": {
     focus: "启动，不求完美",
     tasks: "不买酒、不喝酒 · 5公里轻松跑 · 清理运动服 · 建项目风险清单",
   },
-  "2026-06-02": {
+  "2026-06-09": {
     focus: "第一次把力量训练捡起来",
     tasks: "力量训练 A · 清理衬衫 · 明确一个任务交付标准",
   },
-  "2026-06-03": {
+  "2026-06-10": {
     focus: "主动把问题列出来",
     tasks: "5公里稍快跑 · 更新风险清单 · 与关键经理沟通新要求",
   },
-  "2026-06-04": {
+  "2026-06-11": {
     focus: "力量训练不能因忙取消",
     tasks: "力量训练 B · 清理西装外套 · 建立交付质量五维标准",
   },
-  "2026-06-05": {
+  "2026-06-12": {
     focus: "用复盘替代焦虑",
     tasks: "休息或快走 · 30分钟周复盘 · 对一个交付物做五维反馈",
   },
-  "2026-06-06": {
+  "2026-06-13": {
     focus: "不用酒和手机填满空闲",
     tasks: "篮球或轻松跑 · 清理一个抽屉 · 工作只处理一个必要事项",
   },
-  "2026-06-07": {
+  "2026-06-14": {
     focus: "让下一周自动开始",
     tasks: "记录周最低与平均体重 · 准备食材 · 安排两次力量训练",
   },
@@ -68,6 +68,8 @@ let deferredInstallPrompt = null;
 const form = document.querySelector("#dailyForm");
 const dateInput = document.querySelector("#dateInput");
 const toast = document.querySelector("#toast");
+dateInput.min = toKey(PLAN_START);
+dateInput.max = toKey(PLAN_END);
 
 function loadJson(key, fallback) {
   try {
