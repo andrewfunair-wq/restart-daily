@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#f5f4ef" />
-    <meta name="description" content="三个月行动计划每日执行记录" />
+    <meta name="description" content="记录每日执行、物品、财务与每日新知" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="重新掌舵" />
-    <title>重新掌舵 · 每日执行记录</title>
+    <title>重新掌舵</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -18,36 +18,33 @@
     <div class="app-shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">6月8日 — 8月31日</p>
+          <p class="eyebrow">从 2026年6月15日开始</p>
           <h1>重新掌舵</h1>
         </div>
         <div class="period-badge" id="periodBadge">第 1 周</div>
       </header>
 
       <main>
-        <section class="view active" id="todayView" data-view="today">
+        <section class="view active" data-view="today">
           <div class="date-row">
-            <button class="icon-button" id="previousDay" aria-label="前一天" title="前一天">‹</button>
+            <button class="icon-button" id="previousDay" aria-label="前一天">‹</button>
             <button class="date-picker-button" id="datePickerButton">
-              <span id="dateTitle">6月8日 星期一</span>
+              <span id="dateTitle">6月15日 星期一</span>
               <small id="dateSubtitle">计划第 1 天</small>
             </button>
             <input type="date" id="dateInput" aria-label="选择日期" />
-            <button class="icon-button" id="nextDay" aria-label="后一天" title="后一天">›</button>
+            <button class="icon-button" id="nextDay" aria-label="后一天">›</button>
           </div>
 
           <section class="score-panel">
-            <div class="score-ring" id="scoreRing">
-              <strong id="scoreValue">0</strong>
-              <span>/ 7</span>
-            </div>
+            <div class="score-ring" id="scoreRing"><strong id="scoreValue">0</strong><span>/ 6</span></div>
             <div>
               <p class="score-label" id="scoreLabel">从一件小事开始</p>
               <p class="score-copy" id="scoreCopy">完成 5 项就是合格的一天。</p>
             </div>
           </section>
 
-          <section class="focus-strip" id="dailyFocus">
+          <section class="focus-strip">
             <span class="focus-label">今日重点</span>
             <span class="focus-content">
               <strong id="focusText">启动，不求完美</strong>
@@ -55,22 +52,39 @@
             </span>
           </section>
 
+          <section class="knowledge-card" id="dailyKnowledge">
+            <div class="knowledge-heading">
+              <div>
+                <span class="knowledge-kicker">每日新知</span>
+                <span class="category-pill" id="knowledgeCategory">加载中</span>
+              </div>
+              <small id="knowledgeDate"></small>
+            </div>
+            <h2 id="knowledgeTitle">正在准备今天的知识点</h2>
+            <p id="knowledgeSummary"></p>
+            <div class="knowledge-detail">
+              <strong>为什么值得知道</strong>
+              <p id="knowledgeWhy"></p>
+            </div>
+            <div class="knowledge-prompt" id="knowledgePrompt"></div>
+            <div class="source-list" id="knowledgeSources"></div>
+            <div class="button-row">
+              <button class="secondary-button toggle-button" id="markLearned">已学习</button>
+              <button class="secondary-button toggle-button" id="toggleFavorite">收藏</button>
+            </div>
+          </section>
+
           <form id="dailyForm" autocomplete="off">
             <section class="form-section">
               <div class="section-heading">
-                <div>
-                  <span class="section-number">01</span>
-                  <h2>早上启动</h2>
-                </div>
+                <div><span class="section-number">01</span><h2>早上启动</h2></div>
                 <span class="section-time">10 分钟</span>
               </div>
-
               <label class="field-label" for="weight">今日体重</label>
               <div class="input-with-unit">
                 <input id="weight" name="weight" type="number" min="80" max="300" step="0.1" inputmode="decimal" placeholder="例如 190" />
                 <span>斤</span>
               </div>
-
               <fieldset>
                 <legend>今天最重要的 3 件事</legend>
                 <div class="priority-list">
@@ -79,7 +93,6 @@
                   <label><span>3</span><input name="priority3" type="text" placeholder="第三件事" /></label>
                 </div>
               </fieldset>
-
               <fieldset>
                 <legend>今天的饮酒决定</legend>
                 <div class="segmented three">
@@ -93,25 +106,16 @@
 
             <section class="form-section">
               <div class="section-heading">
-                <div>
-                  <span class="section-number">02</span>
-                  <h2>饮食与运动</h2>
-                </div>
+                <div><span class="section-number">02</span><h2>饮食与运动</h2></div>
                 <span class="section-time">稳住节奏</span>
               </div>
-
               <label class="switch-row">
-                <span>
-                  <strong>16+8 饮食窗口</strong>
-                  <small>12:00–20:00，20:00 后不进食</small>
-                </span>
-                <input type="checkbox" name="fasting" />
-                <i></i>
+                <span><strong>16+8 饮食窗口</strong><small>12:00–20:00，20:00 后不进食</small></span>
+                <input type="checkbox" name="fasting" /><i></i>
               </label>
-
               <fieldset>
                 <legend>今日运动</legend>
-                <div class="choice-grid" id="exerciseChoices">
+                <div class="choice-grid">
                   <label><input type="radio" name="exercise" value="run" /><span>跑步</span></label>
                   <label><input type="radio" name="exercise" value="strengthA" /><span>力量 A</span></label>
                   <label><input type="radio" name="exercise" value="strengthB" /><span>力量 B</span></label>
@@ -121,94 +125,36 @@
                   <label><input type="radio" name="exercise" value="rest" /><span>休息</span></label>
                 </div>
               </fieldset>
-
               <div class="two-columns">
-                <label>
-                  <span class="field-label">时长</span>
-                  <div class="input-with-unit compact">
-                    <input name="exerciseMinutes" type="number" min="0" max="300" inputmode="numeric" placeholder="0" />
-                    <span>分钟</span>
-                  </div>
-                </label>
-                <label>
-                  <span class="field-label">跑步距离</span>
-                  <div class="input-with-unit compact">
-                    <input name="distance" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="0" />
-                    <span>公里</span>
-                  </div>
-                </label>
+                <label><span class="field-label">时长</span><div class="input-with-unit compact"><input name="exerciseMinutes" type="number" min="0" max="300" inputmode="numeric" placeholder="0" /><span>分钟</span></div></label>
+                <label><span class="field-label">跑步距离</span><div class="input-with-unit compact"><input name="distance" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="0" /><span>公里</span></div></label>
               </div>
             </section>
 
             <section class="form-section">
               <div class="section-heading">
-                <div>
-                  <span class="section-number">03</span>
-                  <h2>生活与工作</h2>
-                </div>
-                <span class="section-time">拿回秩序</span>
+                <div><span class="section-number">03</span><h2>关键工作</h2></div>
+                <span class="section-time">推动结果</span>
               </div>
-
               <label class="switch-row">
-                <span>
-                  <strong>断舍离</strong>
-                  <small>每天清理一个小区域</small>
-                </span>
-                <input type="checkbox" name="declutter" />
-                <i></i>
+                <span><strong>完成一个重要工作动作</strong><small>不是忙碌，是推动关键事项</small></span>
+                <input type="checkbox" name="importantWork" /><i></i>
               </label>
-
-              <div class="two-columns">
-                <label>
-                  <span class="field-label">清理时长</span>
-                  <div class="input-with-unit compact">
-                    <input name="declutterMinutes" type="number" min="0" max="180" inputmode="numeric" value="15" />
-                    <span>分钟</span>
-                  </div>
-                </label>
-                <label>
-                  <span class="field-label">清理区域</span>
-                  <input name="declutterArea" type="text" placeholder="衣柜、书桌…" />
-                </label>
-              </div>
-
-              <label class="switch-row">
-                <span>
-                  <strong>完成一个重要工作动作</strong>
-                  <small>不是忙碌，是推动关键事项</small>
-                </span>
-                <input type="checkbox" name="importantWork" />
-                <i></i>
-              </label>
-
-              <label>
-                <span class="field-label">今天推进了什么？</span>
-                <textarea name="workNote" rows="3" placeholder="例如：建立项目风险清单，明确一个任务交付标准"></textarea>
-              </label>
+              <label><span class="field-label">今天推进了什么？</span><textarea name="workNote" rows="3" placeholder="例如：更新项目风险清单，明确任务交付标准"></textarea></label>
             </section>
 
             <section class="form-section reflection-section">
               <div class="section-heading">
-                <div>
-                  <span class="section-number">04</span>
-                  <h2>睡前复盘</h2>
-                </div>
+                <div><span class="section-number">04</span><h2>睡前复盘</h2></div>
                 <span class="section-time">5 分钟</span>
               </div>
-
-              <div class="reflection-grid">
+              <div class="reflection-grid three-items">
                 <label><input type="checkbox" name="reviewAlcohol" /><span>饮酒情况已记录</span></label>
                 <label><input type="checkbox" name="reviewExercise" /><span>运动情况已记录</span></label>
                 <label><input type="checkbox" name="reviewWork" /><span>重要工作已回顾</span></label>
-                <label><input type="checkbox" name="reviewDeclutter" /><span>断舍离已回顾</span></label>
               </div>
-
-              <label>
-                <span class="field-label">给今天留一句话</span>
-                <textarea name="dailyNote" rows="2" placeholder="不写感悟，只记事实"></textarea>
-              </label>
+              <label><span class="field-label">给今天留一句话</span><textarea name="dailyNote" rows="2" placeholder="不写长日记，只记事实"></textarea></label>
             </section>
-
             <div class="save-bar">
               <span id="saveStatus">修改会自动保存</span>
               <button type="submit" class="primary-button">保存今日记录</button>
@@ -216,99 +162,195 @@
           </form>
         </section>
 
-        <section class="view" id="historyView" data-view="history">
-          <div class="page-heading">
-            <p class="eyebrow">一步一步留下证据</p>
-            <h2>历史记录</h2>
-          </div>
-          <div class="history-summary" id="historySummary"></div>
-          <div class="history-list" id="historyList"></div>
-        </section>
-
-        <section class="view" id="weeklyView" data-view="weekly">
-          <div class="page-heading">
-            <p class="eyebrow">看趋势，不审判一天</p>
-            <h2>周复盘</h2>
-          </div>
+        <section class="view" data-view="weekly">
+          <div class="page-heading"><p class="eyebrow">看趋势，不审判一天</p><h2>周复盘</h2></div>
           <div class="week-switcher">
             <button class="icon-button" id="previousWeek" aria-label="上一周">‹</button>
             <strong id="weekTitle">本周</strong>
             <button class="icon-button" id="nextWeek" aria-label="下一周">›</button>
           </div>
           <div class="stats-grid" id="weeklyStats"></div>
-          <section class="weekly-section">
-            <div class="weekly-section-heading">
-              <h3>本周完成度</h3>
-              <span id="weeklyScore"></span>
-            </div>
+          <section class="panel-section">
+            <div class="panel-heading"><h3>本周完成度</h3><span id="weeklyScore"></span></div>
             <div class="week-bars" id="weekBars"></div>
           </section>
-          <section class="weekly-section">
+          <section class="panel-section">
+            <h3>本周断舍离</h3>
+            <form id="declutterForm" class="stack-form">
+              <label><span class="field-label">选择物品</span><select name="itemId" id="declutterItem" required></select></label>
+              <div class="two-columns">
+                <label><span class="field-label">决定</span><select name="action" required><option value="keep">保留</option><option value="sell">出售</option><option value="donate">捐赠</option><option value="discard">丢弃</option></select></label>
+                <label><span class="field-label">整理分钟</span><input name="minutes" type="number" min="1" max="600" value="15" required /></label>
+              </div>
+              <label><span class="field-label">区域或备注</span><input name="note" type="text" placeholder="衣柜、书房，或处理说明" /></label>
+              <button class="secondary-button" type="submit">记录本周处理</button>
+            </form>
+            <div class="compact-list" id="declutterList"></div>
+          </section>
+          <section class="panel-section">
             <h3>下周准备</h3>
-            <label class="weekly-note-label">
-              下周最重要的 3 个工作事项
-              <textarea id="nextWeekPriorities" rows="4" placeholder="每行一项"></textarea>
-            </label>
-            <div class="weekday-picker">
-              <p>安排两次力量训练</p>
-              <div id="strengthDays"></div>
-            </div>
+            <label><span class="field-label">下周最重要的 3 个工作事项</span><textarea id="nextWeekPriorities" rows="4" placeholder="每行一项"></textarea></label>
+            <div class="weekday-picker"><p>安排两次力量训练</p><div id="strengthDays"></div></div>
           </section>
         </section>
 
-        <section class="view" id="settingsView" data-view="settings">
-          <div class="page-heading">
-            <p class="eyebrow">你的记录，归你所有</p>
-            <h2>数据与备份</h2>
+        <section class="view" data-view="inventory">
+          <div class="page-heading page-heading-row">
+            <div><p class="eyebrow">看见拥有，才容易取舍</p><h2>物品清单</h2></div>
+            <button class="primary-button compact-button" id="newItem">新增</button>
           </div>
-          <section class="settings-section install-card">
-            <div class="install-card-heading">
-              <div class="app-icon-preview">舵</div>
-              <div>
-                <h3>安装到 iPhone</h3>
-                <p id="installStatus">像普通 App 一样从主屏幕打开。</p>
-              </div>
+          <div class="summary-strip" id="inventorySummary"></div>
+          <div class="filter-grid">
+            <input id="inventorySearch" type="search" placeholder="搜索物品" />
+            <select id="inventoryCategory"><option value="">全部分类</option></select>
+            <select id="inventoryStatus"><option value="">全部状态</option></select>
+          </div>
+          <div class="item-list" id="inventoryList"></div>
+          <section class="panel-section import-section">
+            <h3>导入淘宝物品</h3>
+            <p>导入由淘宝近36个月已完成耐用品订单整理出的 JSON 文件。所有项目先进入“待确认”。</p>
+            <label class="file-button">选择淘宝 JSON<input type="file" id="taobaoImport" accept="application/json,.json" /></label>
+          </section>
+        </section>
+
+        <section class="view" data-view="finance">
+          <div class="page-heading"><p class="eyebrow">资产清楚，选择才从容</p><h2>财务分析</h2></div>
+          <div class="tabs" id="financeTabs">
+            <button class="active" data-finance-tab="overview">概览</button>
+            <button data-finance-tab="accounts">账户</button>
+            <button data-finance-tab="transactions">收支</button>
+          </div>
+          <div class="finance-pane active" data-finance-pane="overview">
+            <div class="metric-grid" id="financeMetrics"></div>
+            <section class="panel-section">
+              <div class="panel-heading"><h3>净资产趋势</h3><button class="secondary-button small-button" id="createSnapshot">生成本月快照</button></div>
+              <div class="trend-list" id="snapshotList"></div>
+            </section>
+            <section class="panel-section"><h3>本月支出结构</h3><div id="expenseBreakdown"></div></section>
+          </div>
+          <div class="finance-pane" data-finance-pane="accounts">
+            <button class="primary-button full-button" id="newAccount">新增账户</button>
+            <div class="item-list" id="accountList"></div>
+          </div>
+          <div class="finance-pane" data-finance-pane="transactions">
+            <button class="primary-button full-button" id="newTransaction">记录一笔收支</button>
+            <div class="filter-grid two-filter">
+              <input id="transactionMonth" type="month" />
+              <select id="transactionType"><option value="">全部类型</option><option value="income">收入</option><option value="expense">支出</option></select>
             </div>
-            <ol class="install-steps" id="installSteps">
-              <li>使用 Safari 打开远程网址</li>
-              <li>点击底部的“分享”按钮</li>
-              <li>选择“添加到主屏幕”</li>
-            </ol>
-            <button class="primary-button install-button" id="installApp" hidden>安装应用</button>
+            <div class="item-list" id="transactionList"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="more">
+          <div class="page-heading"><p class="eyebrow">历史、知识与数据</p><h2>更多</h2></div>
+          <section class="panel-section">
+            <div class="panel-heading"><h3>历史记录</h3><span id="historyCount"></span></div>
+            <div class="history-summary" id="historySummary"></div>
+            <div class="history-list" id="historyList"></div>
           </section>
-          <section class="settings-section">
-            <h3>导出记录</h3>
-            <p>JSON 可完整恢复；CSV 适合在 Excel 中查看。</p>
-            <div class="button-row">
-              <button class="secondary-button" id="exportJson">导出 JSON</button>
-              <button class="secondary-button" id="exportCsv">导出 CSV</button>
+          <section class="panel-section">
+            <h3>新知档案</h3>
+            <div class="filter-grid knowledge-filters">
+              <select id="knowledgeCategoryFilter"><option value="">全部分类</option></select>
+              <select id="knowledgeProgressFilter"><option value="">全部状态</option><option value="learned">已学习</option><option value="favorite">已收藏</option></select>
+            </div>
+            <div class="knowledge-archive" id="knowledgeArchive"></div>
+          </section>
+          <section class="panel-section install-card">
+            <div class="install-card-heading"><div class="app-icon-preview">舵</div><div><h3>安装到 iPhone</h3><p id="installStatus">像普通 App 一样从主屏幕打开。</p></div></div>
+            <ol class="install-steps" id="installSteps"><li>使用 Safari 打开远程网址</li><li>点击底部“分享”按钮</li><li>选择“添加到主屏幕”</li></ol>
+            <button class="primary-button full-button" id="installApp" hidden>安装应用</button>
+          </section>
+          <section class="panel-section">
+            <h3>数据与备份</h3>
+            <p>JSON 可完整恢复全部模块；CSV 分别导出每日、物品、收支和快照。</p>
+            <div class="button-grid">
+              <button class="secondary-button" id="exportJson">完整 JSON</button>
+              <button class="secondary-button" data-export-csv="daily">每日 CSV</button>
+              <button class="secondary-button" data-export-csv="inventory">物品 CSV</button>
+              <button class="secondary-button" data-export-csv="transactions">收支 CSV</button>
+              <button class="secondary-button" data-export-csv="snapshots">快照 CSV</button>
+              <label class="file-button">导入 JSON<input type="file" id="importJson" accept="application/json,.json" /></label>
             </div>
           </section>
-          <section class="settings-section">
-            <h3>导入备份</h3>
-            <p>导入此前导出的 JSON 文件。相同日期的记录将被覆盖。</p>
-            <label class="file-button">
-              选择 JSON 文件
-              <input type="file" id="importJson" accept="application/json,.json" />
-            </label>
-          </section>
-          <section class="settings-section goal-card">
-            <span>8 月底目标</span>
-            <strong>190 → 175 斤</strong>
-            <p>非应酬不喝酒 · 跑步 3 次 · 力量 2 次 · 每天整理 15 分钟</p>
-          </section>
+          <section class="panel-section goal-card"><span>长期目标</span><strong>190 → 175 斤</strong><p>非应酬不喝酒 · 跑步 3 次 · 力量 2 次 · 每周处理一批物品</p></section>
         </section>
       </main>
 
       <nav class="bottom-nav" aria-label="主要导航">
         <button class="active" data-target="today"><span>✓</span>今日</button>
-        <button data-target="history"><span>▦</span>历史</button>
         <button data-target="weekly"><span>≋</span>周复盘</button>
-        <button data-target="settings"><span>⋯</span>数据</button>
+        <button data-target="inventory"><span>□</span>物品</button>
+        <button data-target="finance"><span>¥</span>财务</button>
+        <button data-target="more"><span>⋯</span>更多</button>
       </nav>
     </div>
 
+    <dialog id="itemDialog">
+      <form method="dialog" id="itemForm" class="dialog-form">
+        <div class="dialog-heading"><h2>物品</h2><button class="icon-button close-dialog" value="cancel" aria-label="关闭">×</button></div>
+        <input type="hidden" name="id" />
+        <label><span class="field-label">名称</span><input name="name" type="text" required /></label>
+        <div class="two-columns">
+          <label><span class="field-label">分类</span><select name="category" required></select></label>
+          <label><span class="field-label">状态</span><select name="status" required></select></label>
+        </div>
+        <div class="three-columns">
+          <label><span class="field-label">数量</span><input name="quantity" type="number" min="1" value="1" required /></label>
+          <label><span class="field-label">价格</span><input name="price" type="number" min="0" step="0.01" /></label>
+          <label><span class="field-label">币种</span><select name="currency" class="currency-select"></select></label>
+        </div>
+        <div class="two-columns">
+          <label><span class="field-label">购入日期</span><input name="acquiredAt" type="date" /></label>
+          <label><span class="field-label">来源</span><input name="source" type="text" placeholder="淘宝、门店…" /></label>
+        </div>
+        <label><span class="field-label">位置</span><input name="location" type="text" placeholder="书房、衣柜…" /></label>
+        <label><span class="field-label">备注</span><textarea name="notes" rows="2"></textarea></label>
+        <button class="primary-button" value="default" type="submit">保存物品</button>
+      </form>
+    </dialog>
+
+    <dialog id="accountDialog">
+      <form method="dialog" id="accountForm" class="dialog-form">
+        <div class="dialog-heading"><h2>财务账户</h2><button class="icon-button close-dialog" value="cancel" aria-label="关闭">×</button></div>
+        <input type="hidden" name="id" />
+        <label><span class="field-label">账户名称</span><input name="name" type="text" required /></label>
+        <div class="two-columns">
+          <label><span class="field-label">性质</span><select name="side"><option value="asset">资产</option><option value="liability">负债</option></select></label>
+          <label><span class="field-label">类别</span><input name="category" type="text" placeholder="银行存款、房贷…" required /></label>
+        </div>
+        <div class="three-columns">
+          <label><span class="field-label">余额</span><input name="balance" type="number" step="0.01" required /></label>
+          <label><span class="field-label">币种</span><select name="currency" class="currency-select"></select></label>
+          <label><span class="field-label">余额日期</span><input name="asOfDate" type="date" required /></label>
+        </div>
+        <label><span class="field-label">手工兑人民币汇率（可选）</span><input name="manualRate" type="number" min="0" step="0.000001" placeholder="1单位外币折合人民币" /></label>
+        <button class="primary-button" value="default" type="submit">保存账户</button>
+      </form>
+    </dialog>
+
+    <dialog id="transactionDialog">
+      <form method="dialog" id="transactionForm" class="dialog-form">
+        <div class="dialog-heading"><h2>收入 / 支出</h2><button class="icon-button close-dialog" value="cancel" aria-label="关闭">×</button></div>
+        <input type="hidden" name="id" />
+        <div class="two-columns">
+          <label><span class="field-label">类型</span><select name="type"><option value="expense">支出</option><option value="income">收入</option></select></label>
+          <label><span class="field-label">日期</span><input name="date" type="date" required /></label>
+        </div>
+        <label><span class="field-label">类别</span><input name="category" type="text" placeholder="餐饮、工资、交通…" required /></label>
+        <div class="two-columns">
+          <label><span class="field-label">金额</span><input name="amount" type="number" min="0.01" step="0.01" required /></label>
+          <label><span class="field-label">币种</span><select name="currency" class="currency-select"></select></label>
+        </div>
+        <label><span class="field-label">关联账户（可选）</span><select name="accountId" id="transactionAccount"></select></label>
+        <label><span class="field-label">备注</span><textarea name="note" rows="2"></textarea></label>
+        <button class="primary-button" value="default" type="submit">保存收支</button>
+      </form>
+    </dialog>
+
     <div class="toast" id="toast" role="status"></div>
+    <script src="./knowledge/fallback.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
