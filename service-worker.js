@@ -1,9 +1,10 @@
-const CACHE_NAME = "restart-daily-v3";
+const CACHE_NAME = "restart-daily-v4";
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
+  "./knowledge/fallback.js",
   "./manifest.webmanifest",
   "./app-icon.svg",
   "./apple-touch-icon.png",
