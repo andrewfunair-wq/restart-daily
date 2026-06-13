@@ -1,7 +1,7 @@
 {
   "name": "重新掌舵 · 每日执行记录",
   "short_name": "重新掌舵",
-  "description": "记录身体、工作、注意力和生活秩序的每日执行情况。",
+  "description": "记录每日执行、物品、财务与每日新知。",
   "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",
