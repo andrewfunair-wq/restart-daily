@@ -732,35 +732,14 @@ function stableIndex(key, length) {
   return Math.abs(hash) % length;
 }
 
-function validKnowledge(value) {
-  return value && value.title && value.category && value.summary && value.why && value.prompt &&
-    Array.isArray(value.sources) && value.sources.length >= 1;
-}
-
 async function loadKnowledge(key) {
-  const cached = state.knowledge[key];
-  if (cached && cached.origin === "ai") return cached;
-  try {
-    const response = await fetch(`./knowledge/${key}.json`, { cache: "no-store" });
-    if (response.ok) {
-      const value = await response.json();
-      if (validKnowledge(value)) {
-        const knowledge = { ...value, date: key, origin: "ai" };
-        state.knowledge[key] = knowledge;
-        persist(KEYS.knowledge, state.knowledge);
-        return knowledge;
-      }
-    }
-  } catch {
-    // Offline mode uses the deterministic fallback below.
-  }
   const fallback = window.FALLBACK_KNOWLEDGE || [];
   const knowledge = fallback[stableIndex(key, fallback.length)] || {
     category: "科学", title: "知识正在路上", summary: "今天的知识文件暂时不可用。",
-    why: "稍后联网重新打开即可更新。", prompt: "你今天最想弄明白什么？",
-    sources: [{ name: "OpenAI", url: "https://openai.com/" }],
+    why: "内置知识库将在下次版本更新时补充。", prompt: "你今天最想弄明白什么？",
+    sources: [],
   };
-  const value = { ...knowledge, date: key, origin: "fallback" };
+  const value = { ...knowledge, date: key, origin: "built-in" };
   state.knowledge[key] = value;
   persist(KEYS.knowledge, state.knowledge);
   return value;
@@ -772,7 +751,7 @@ async function renderKnowledge(key) {
   state.currentKnowledge = knowledge;
   const progress = state.knowledgeProgress[key] || {};
   document.querySelector("#knowledgeCategory").textContent = knowledge.category;
-  document.querySelector("#knowledgeDate").textContent = knowledge.origin === "ai" ? "AI 每日生成" : "离线备用";
+  document.querySelector("#knowledgeDate").textContent = "内置知识库";
   document.querySelector("#knowledgeTitle").textContent = knowledge.title;
   document.querySelector("#knowledgeSummary").textContent = knowledge.summary;
   document.querySelector("#knowledgeWhy").textContent = knowledge.why;
